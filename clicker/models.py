@@ -71,7 +71,7 @@ class Player(AbstractBaseUser):
         self.money_per_sec += item.money_per_sec
         self.save()
 
-        return "Покупка прошла успешно!"
+        return ["Покупка прошла успешно!"]
 
 
 
