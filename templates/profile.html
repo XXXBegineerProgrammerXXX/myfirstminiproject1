@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль{% endblock title %}
+
+{% block content %}
+<div style="
+    background: #121212;
+    color: white;
+    padding: 30px;
+    box-sizing: border-box;
+    flex: 1;
+">
+    <!-- Заголовок профиля -->
+    <div style="max-width: 800px; margin: 0 auto 30px;">
+        <h1 style="color: white; font-size: 28px; margin-bottom: 5px;">{{ player.nickname }}</h1>
+        <p style="color: #aaaaaa; font-size: 14px; margin: 0;">UID: {{ player.id }}</p>
+    </div>
+    
+    <!-- Статистика -->
+    <div style="
+        max-width: 800px;
+        margin: 0 auto;
+        background: #444444;
+        border-radius: 8px;
+        padding: 20px;
+    ">
+        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #555;">
+            <span style="color: #cccccc;">Баланс:</span>
+            <span style="color: #2ecc71; font-weight: bold;">{{ player.money }} монет</span>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #555;">
+            <span style="color: #cccccc;">Доход за клик:</span>
+            <span style="color: #e67e22; font-weight: bold;">{{ player.money_per_click }} монет</span>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; padding: 12px 0;">
+            <span style="color: #cccccc;">Доход в секунду:</span>
+            <span style="color: #3498db; font-weight: bold;">{{ player.money_per_sec }} монет</span>
+        </div>
+    </div>
+    
+    <!-- Кнопка выхода -->
+    <div style="max-width: 800px; margin: 30px auto 0; text-align: right;">
+        <a href="{% url 'logout' %}" 
+           style="display: inline-block; 
+                  padding: 10px 20px; 
+                  background: #e74c3c; 
+                  color: white; 
+                  text-decoration: none; 
+                  border-radius: 5px;
+                  font-weight: bold;
+                  transition: background 0.3s;"
+           onmouseover="this.style.background='#c0392b'" 
+           onmouseout="this.style.background='#e74c3c'">
+           Выйти
+        </a>
+    </div>
+</div>
+{% endblock content %}

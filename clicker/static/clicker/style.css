@@ -1,0 +1,516 @@
+* {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%; /* Задаем высоту для html и body */
+            margin: 0; /* Убираем отступы */
+            background-color: #121212; /* Цвет фона страницы */
+            color: #ffffff; /* Цвет текста по умолчанию */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column; /* Располагаем элементы по вертикали */
+        }
+
+
+        .content {
+            flex: 1; /* Занимает оставшееся пространство между навигацией и футером */
+            display: flex;
+            justify-content: center; /* Центрируем содержимое по горизонтали */
+            align-items: center; /* Центрируем содержимое по вертикали */
+        }
+
+        h2 {
+            text-align: center; /* Центрирование текста заголовка */
+            margin-bottom: 20px; /* Отступ снизу для отделения от формы */
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 300px; /* Ширина поля ввода */
+            padding: 10px; /* Отступы внутри поля ввода */
+            margin: 10px 0; /* Отступы между полями ввода */
+            border: 1px solid #ccc; /* Рамка поля ввода */
+            border-radius: 5px; /* Скругление углов полей ввода */
+            font-size: 16px; /* Размер шрифта */
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #007bff; /* Цвет рамки при фокусе */
+            outline: none; /* Убираем стандартное выделение */
+        }
+
+        button {
+            padding: 15px 30px; /* Отступы внутри кнопок */
+            font-size: 16px; /* Размер шрифта */
+            margin: 10px; /* Отступ между кнопками */
+            cursor: pointer; /* Курсор при наведении на кнопку */
+            border: none; /* Убираем рамку */
+            border-radius: 5px; /* Скругление углов */
+            background-color: #007bff; /* Цвет фона кнопок */
+            color: white; /* Цвет текста на кнопках */
+            transition: background-color 0.3s; /* Плавный переход цвета */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Цвет кнопки при наведении */
+        }
+
+        .error {
+            background-color: #f8d7da; /* Светло-красный фон */
+            color: #721c24; /* Темно-красный текст */
+            border: 1px solid #f5c6cb; /* Красная рамка */
+            border-radius: 5px; /* Закругленные углы */
+            padding: 15px; /* Отступы внутри блока */
+            margin: 20px 0; /* Отступ сверху и снизу */
+        }
+
+        .error p {
+            font-weight: bold; /* Жирный шрифт для заголовка */
+            margin-bottom: 10px; /* Отступ снизу */
+        }
+
+        .error ul {
+            list-style-type: none; /* Убираем маркеры списка */
+            padding-left: 0; /* Убираем отступ слева */
+        }
+
+        .error li {
+            margin-bottom: 5px; /* Отступ между элементами списка */
+        }
+
+        .messages-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 300px;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            animation: slideIn 0.5s forwards;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* Цвета для разных типов сообщений */
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .navbar {
+            background-color: #333333; /* Темный фон навигации */
+            padding: 10px 20px; /* Отступы вокруг навигации */
+        }
+
+        .nav-container {
+            display: flex; /* Используем flexbox для горизонтального расположения ссылок */
+            justify-content: space-around; /* Равномерное распределение ссылок */
+        }
+
+        /* Стили для ссылок */
+        .nav-link {
+            color: #ffffff; /* Цвет текста ссылок */
+            text-decoration: none; /* Убираем подчеркивание */
+            padding: 10px 15px; /* Отступы вокруг текста ссылок */
+            transition: background-color 0.3s, color 0.3s; /* Плавный переход при наведении */
+        }
+
+        /* Стили при наведении на ссылки */
+        .nav-link:hover {
+            background-color: #333333; /* Цвет фона при наведении */
+            color: #ffcc00; /* Цвет текста при наведении */
+        }
+
+        /* Стили для активной ссылки */
+        .nav-link.active {
+            font-weight: bold; /* Выделяем активную ссылку жирным шрифтом */
+            border-bottom: 2px solid #ffcc00; /* Подчеркивание активной ссылки */
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Добавлено это свойство */
+        }
+
+        .popup-content {
+            background-color: #333333;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative; /* Добавлено для корректного позиционирования */
+            z-index: 10000; /* Можно задать еще выше, чем у popup */
+        }
+
+        .close {
+            float: right;
+            font-size: 20px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        #popup:target {
+            display: flex;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center; /* Центрируем ссылку по горизонтали */
+            padding: 20px;
+            background-color: #333333; /* Цвет фона подвала */
+            color: #1e1e1e;
+        }
+
+        /* Стили для ссылки в подвале */
+        .footer-link {
+            text-decoration: none; /* Убираем подчеркивание */
+            color: #ffffff; /* Цвет ссылки */
+        }
+
+        .footer-link:hover {
+            text-decoration: underline; /* Подчеркивание при наведении */
+        }
+
+        .main-page {
+            display: flex;
+            justify-content: center; /* Центрируем кнопки по горизонтали */
+            padding: 50px 50px;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column; /* Вертикальное расположение элементов */
+            align-items: center; /* Центрируем элементы по горизонтали */
+            justify-content: center; /* Центрируем элементы по вертикали */
+            height: 100vh; /* Занимаем всю высоту экрана */
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column; /* Вертикальное расположение полей ввода и кнопки */
+            align-items: center; /* Центрируем элементы по горизонтали */
+        }
+
+        .balance-button {
+            position: relative;
+            padding: 1.5rem 3rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            background: #27ae60;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            z-index: 42;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .balance-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+            background: #219a52;
+        }
+
+        .balance-button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+        }
+
+        .button-plus {
+            margin-left: 10px;
+            font-weight: bold;
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+        }
+
+        .balance-button:hover .button-plus {
+            transform: rotate(360deg);
+        }
+
+        .button-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .balance-display {
+            position: fixed;
+            top: 75px;
+            left: 30px;
+            background: rgba(255, 215, 0, 0.9);
+            padding: 10px 15px;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            border: 2px solid #daa520;
+        }
+
+        .balance-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-right: 5px;
+        }
+
+        .balance-currency {
+            font-size: 1.3rem;
+        }
+
+
+
+        .items-table {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .items-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Карточки предметов */
+        .item-card {
+            width: 140px;
+            padding: 15px;
+            background-color: #0f3460;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            background-color: #133b6e;
+        }
+
+        .item-emoji {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .item-title {
+            font-size: 1em;
+            margin: 5px 0;
+            color: #f8f8f8;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-stats {
+            font-size: 0.8em;
+            margin: 10px 0;
+            color: #b8b8b8;
+        }
+
+        .item-stats p {
+            margin: 5px 0;
+        }
+
+        /* Кнопки */
+        .buy-btn {
+            width: 100%;
+            padding: 8px 0;
+            background-color: #3a7bd5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .buy-btn:hover {
+            background-color: #2c65b5;
+        }
+
+        /* Особый предмет */
+        .ultimate-item {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .ultimate {
+            width: 300px;
+            background: linear-gradient(135deg, #3a0ca3, #4361ee);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ultimate .item-emoji {
+            font-size: 3.5em;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+
+        .ultimate .item-title {
+            font-size: 1.5em;
+            color: #f9c74f;
+        }
+
+        .ultimate-desc {
+            font-style: italic;
+            margin: 10px 0;
+            color: #a7c7ff;
+        }
+
+        .ultimate-btn {
+            width: 100%;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            background: linear-gradient(to right, #f9c74f, #f8961e);
+            font-size: 1.1em;
+            padding: 10px 0;
+        }
+
+
+        /* Общие стили для блока лидерборда */
+        .leaderboard-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #2d3748;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            color: #e2e8f0;
+        }
+
+        /* Стиль для текущего игрока (если не в топе) */
+        .current-player {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 20px;
+            margin-bottom: 15px;
+            background-color: #4a5568;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #f7fafc;
+            border-left: 4px solid #4299e1;
+        }
+
+        /* Стили для списка лидеров */
+        .leaderboard-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Стили для каждого элемента в топе */
+        .leaderboard-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 20px;
+            margin-bottom: 8px;
+            background-color: #4a5568;
+            border-radius: 8px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        /* Стили для первых трех мест */
+        .leaderboard-item:nth-child(1) {
+            background: linear-gradient(90deg, #f6e05e, #f6ad55);
+            color: #1a202c;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .leaderboard-item:nth-child(2) {
+            background: linear-gradient(90deg, #e2e8f0, #a0aec0);
+            color: #1a202c;
+        }
+
+        .leaderboard-item:nth-child(3) {
+            background: linear-gradient(90deg, #f0b58d, #ed8936);
+        }
+
+        /* Эффекты при наведении */
+        .leaderboard-item:hover {
+            transform: translateX(5px);
+            background-color: #5a6778;
+        }
+
+        /* Стили для текста внутри элементов */
+        .leaderboard-item p, .current-player p {
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        /* Стили для никнейма */
+        .player-nickname {
+            font-weight: 600;
+            margin-right: 20px;
+        }
+
+        /* Стили для количества кликов */
+        .player-clicks {
+            color: #cbd5e0;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Для первого места - золотой текст */
+        .leaderboard-item:nth-child(1) .player-clicks {
+            color: #7b341e;
+        }
+
+        /* Нумерация */
+        .player-rank {
+            display: inline-block;
+            width: 30px;
+            text-align: right;
+            margin-right: 15px;
+            font-weight: bold;
+            color: #a0aec0;
+        }

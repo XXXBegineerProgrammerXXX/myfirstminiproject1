@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Магазин{% endblock title %}
+
+{% block content %}
+    <div class="balance-display">
+        <span class="balance-amount">{{ user.money }}</span>
+        <span class="balance-currency">💰</span>
+    </div>
+    <div class="store-container">
+        <div class="items-table">
+            {% for row in items_table %}
+            <div class="items-row">
+                {% for item in row %}
+                <div class="item-card">
+                    <h3 class="item-title">{{ item.title }}</h3>
+                    <div class="item-stats">
+                        <p>Цена: {{ item.price }} монет</p>
+                        <p>+{{ item.money_per_click }} за клик</p>
+                        <p>+{{ item.money_per_sec }} в сек</p>
+                    </div>
+                    <form id="buy-form" method="post" action="/shop/">
+                        {% csrf_token %}
+                        <button class="buy-btn">Купить</button>
+                        <input type="hidden" name="item_id" value="{{ item.id }}">
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    
+        <div class="ultimate-item">
+            <div class="item-card ultimate">
+                <div class="item-emoji">🌌</div>
+                <h3 class="item-title">{{ ult_item.title }}</h3>
+                <div class="item-stats">
+                    <p>Цена: {{ ult_item.price }} монет</p>
+                    <p>+{{ ult_item.money_per_click }} за клик</p>
+                    <p>+{{ ult_item.money_per_sec }} в сек</p>
+                </div>
+                <p class="ultimate-desc">Дарует абсолютную власть над вселенной</p>
+                <form id="ult-buy" method="post" action="/shop/">
+                    {% csrf_token %}
+                    <button class="ultimate-btn">Приобрести Могущество</button>
+                    <input type="hidden" name="item_id" value="49">
+                </form>
+            </div>
+        </div>
+    {% if messages %}
+        <div class="messages-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+        </div>
+{% endif %}
+    </div>
+{% endblock content %}

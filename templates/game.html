@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Кликер{% endblock title %}
+
+{% block content %}
+    <div class="content">
+        <div class="balance-display">
+            <span class="balance-amount">{{ user.money }}</span>
+            <span class="balance-currency">💰</span>
+        </div>
+        <form method="POST" action="/game/">
+            {% csrf_token %}
+        <button type="submit" class="balance-button">Нажми</button>
+        </form>    
+    </div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Таблица Лидеров{% endblock title %}
+
+{% block content %}
+    <header><h2>Таблица Лидеров</h2></header>
+
+    <div class="leaderboard-container">
+        {% if player not in leaders %}
+            <div class="current-player">
+                <span class="player-rank">{{ index_player }}</span>
+                <span class="player-nickname">{{ player.nickname }}</span>
+                <span class="player-clicks">{{ player.clicks }} кликов</span>
+            </div>
+            {% endif %}
+    
+        <ol class="leaderboard-list">
+            {% for element in leaders %}
+                <li class="leaderboard-item">
+                <span class="player-rank">{{ forloop.counter }}</span>
+                <span class="player-nickname">{{ element.nickname }}</span>
+                <span class="player-clicks">{{ element.clicks }} кликов</span>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+{% endblock content %}
